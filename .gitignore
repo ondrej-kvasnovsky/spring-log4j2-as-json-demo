@@ -1,0 +1,8 @@
+last-build.bin
+.gradle
+gradlew
+gradlew.bat
+build
+gradle
+logs
+out

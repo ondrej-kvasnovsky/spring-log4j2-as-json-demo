@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="ConsoleJSONAppender" target="SYSTEM_OUT">
+            <JsonLayout complete="false" compact="true" eventEol="true">
+                <KeyValuePair key="app" value="my-app-name" />
+            </JsonLayout>
+        </Console>
+        <RollingFile name="FileAppender" fileName="logs/app.log"
+                     filePattern="logs/$${date:yyyy-MM-dd}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <JsonLayout complete="false" compact="true" eventEol="true">
+            </JsonLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <Async name="Async">
+            <AppenderRef ref="FileAppender"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="com.example" level="INFO"/>
+        <Root level="warn">
+            <AppenderRef ref="ConsoleJSONAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
